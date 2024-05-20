@@ -1,0 +1,34 @@
+<div class="galeria-productos py-3 row">
+
+    {{#each productos}}
+    <div class="contenedor-producto col-12  col-sm-6 col-md-4" id="producto{{this.id}}" data-nombre="{{this.nombre}}">
+        <p class="fs-3">{{this.nombre}}</p>
+        <img src={{this.img}} alt="{{this.nombre}}" class="d-block mx-auto">
+        <button class="btn btn-primary"
+            onclick="agregarAlCarrito('{{this.id}}', '{{this.nombre}}', '{{this.img}}')">Comprar</button>
+    </div>
+    {{/each}}
+</div>
+
+<style>
+    .contenedor-producto img {
+        width: 55%;
+    }
+</style>
+
+<script>
+
+    function agregarAlCarrito(id, nombre, img) {
+        let item = { id, nombre, img };
+        let producto = carrito.find(item => item.id == id)
+        if (producto) {
+            alert("El producto ya se encuentra en el carrito")
+        } else {
+            carrito.push(item);
+            document.getElementById(`producto${id}`).style.opacity = "0.5";
+            console.log(carrito);
+        }
+
+    }
+
+</script>
